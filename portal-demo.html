@@ -1,0 +1,1118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://kit.fontawesome.com/d751771b71.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <title>Wis</title>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: sans-serif;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        #tag-line {
+            margin-top: 19px;
+            margin-left: 35px;
+            font-size: 2rem;
+            /* width: 22%; */
+            width: 55%;
+            color: grey;
+            float: left;
+        }
+        
+        .form-group{
+            padding-left: 2rem;
+        }
+
+        .form-label {
+            color: grey;
+            font-size: 20px;
+        }
+
+        .form-input {
+            width: 80%;
+            padding: 5px;
+            margin: 20px 0px 40px 0px;
+            border: none;
+            border-bottom: 1px solid rgb(21, 189, 201);
+            /* text-align: center; */
+            font-size: 1em;
+        }
+
+        i {
+            color: rgb(21, 189, 201);
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .fa.fa-chevron-right{
+            font-size: x-large;
+        }
+
+        .errorMsg{
+            margin-top: -2.6em;
+            color: red;
+            font-size: 13px;
+            visibility: hidden;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .outer-container {
+            /* position: relative; */
+        }
+
+        .container {
+            position: absolute;
+            top: -25%;
+            left: 50%;
+            transform: translate(-50%, 30%);
+            display: flex;
+            flex-direction: row;
+            width: 400px;
+            /* border: 1px solid black; */
+            justify-content: center;
+            margin-bottom: 2em;
+        }
+
+        .inputfield {
+            visibility: hidden;
+            /* display: none; */
+        }
+
+        .select-box{
+            width: 230px;
+            position: relative;
+        }
+        
+        .select-box select{
+            /* Select Reset */
+            height: 42px;
+            padding: 10px 15px;
+            line-height: 18px;
+            font-size: 16px;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid rgb(21, 189, 201);
+            border-radius: 5px;
+            -webkit-appearance: none;
+            /* -moz-appearance: none; */
+            appearance: none;        
+        }
+
+        .select-box:after{
+            content: "";
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            margin-top: -5px;
+            border-top: 8px solid #ccc;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            pointer-events: none;
+             
+        }
+
+        .select-box select option{
+            width: auto !important;
+            max-width: 230px;
+            overflow: hidden;
+            /* background-color: red; */
+        }
+
+        .select-box select:focus{
+            border:1px solid rgb(21, 189, 201);
+        }
+
+        /* .weekDays-selector{
+            visibility: hidden;
+        } */
+        #weekDays-selector input {
+            display: none !important;
+
+        }
+
+        #weekDays-selector input[type=checkbox]+label {
+            display: inline-block;
+            padding: 15px;
+            border-radius: 50px;
+            background: #dddddd;
+            height: 50px;
+            width: 51px;
+            margin-top: 1em;
+            margin-right: 9px;
+            line-height: 18px;
+            text-align: center;
+            text-indent: -0.2em;
+            cursor: pointer;
+        }
+
+        #weekDays-selector input[type=checkbox]:checked+label {
+            background: rgb(21, 189, 201);
+            color: #ffffff;
+        }
+
+        .add_learner {
+            color: grey;
+            margin-bottom: 40px;
+        }
+
+        .add_learner i {
+            float: left;
+            margin: 0.5em 0.5em 0.5em 0;
+        }
+
+        .add_learner p {
+            display: inline-block;
+            margin-left: 1em;
+            font-size: 13px;
+        }
+
+        #dd_for_schedule{
+            margin-left: -1em;
+        }
+
+        /* #custom-button{
+            padding: 10px;
+            color: grey;
+            background-color:white;
+            border: 1px solid #000;
+            border-radius: 2px;
+            position: absolute;
+            right: 5%;
+            bottom:100px;
+            font-weight: bold;
+            cursor: pointer;
+        } */
+
+        /* nav css */
+        nav{
+        /* background: #0082e6; */
+            height: 80px;
+            width: 100%;
+        }
+
+        nav ul{
+            float: right;
+            margin-right: 20px;
+        }
+        nav ul li{
+            display: inline-block;
+            line-height: 110px;
+            margin: 0 5px;
+        }
+        nav ul li a{
+            color:grey;
+            font-size: 17px;
+            padding: 7px 13px;
+            border-radius: 3px;
+            /* text-transform: uppercase; */
+        }
+        a:hover{
+            background: #15bdc9;
+            transition: .5s;
+            color: white;
+        }
+        .checkbtn{
+            font-size: 30px;
+            color: white;
+            float: right;
+            line-height: 80px;
+            margin-right: 40px;
+            cursor: pointer;
+            display: none;
+        }
+        #check{
+            display: none;
+        }
+
+        /* nav css close */
+        @media all and (min-width: 1025px) {
+            #bars {
+                display: none;
+            }
+        }
+
+        @media all and (max-width: 1024px) {
+            #bars {
+                display: none;
+            }
+            .container {
+                width: 400px;
+                top: -7em;
+                /* background-color: red; */
+            }
+        }
+
+        @media all and (max-width: 991px) {
+            #bars {
+                display: none;
+            }
+
+            #tag-line {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                width: 400px;
+                top:-13em;
+                /* background-color: red; */
+            }
+        }
+
+        @media (max-width:952px){
+            
+            nav ul li a{
+                font-size: 16px;
+                font-weight: bold;
+            }
+            nav a{
+                margin-top: 40px;
+                margin-right: -10px;
+                font-size: 90%;
+            }
+            #nav-toggle 
+            {
+            position: absolute; 
+            left: 87%; 
+            top: 1%; 
+            }
+
+            #nav-toggle 
+            {
+                cursor: pointer; 
+                /* padding: 10px 35px 16px 0px;  */
+                
+            }
+            #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+                cursor: pointer;
+                border-radius: 1px;
+                height: 5px;
+                width: 35px;
+                background:#15bdc9;
+                position: absolute;
+                display: block;
+                content: '';
+            }
+            #nav-toggle span:before {
+                top: -10px; 
+            }
+            #nav-toggle span:after {
+                bottom: -10px;
+            }
+
+            #nav-toggle span, #nav-toggle span:before, #nav-toggle span:after {
+                transition: all 110ms ease-in-out;
+            }
+            #nav-toggle.active span {
+                background-color: transparent;
+            }
+            #nav-toggle.active span:before, #nav-toggle.active span:after {
+                top: 0;
+            }
+            #nav-toggle.active span:before {
+                transform: rotate(45deg);
+            }
+            #nav-toggle.active span:after {
+                transform: rotate(-45deg);
+            }
+        }
+        @media (max-width: 858px){
+            .checkbtn{
+                display: block;
+            }
+            ul{
+                position: absolute;
+                /* width: 50%; */
+                float:right;
+                /* height: 25vh; */
+                /* background:grey; */
+                top: 5em;
+                right: 0;
+                visibility: hidden;
+                /* left: -100%; */
+                text-align: right;
+                transition: all .25s ease;
+                
+                
+            }
+            nav ul li{
+                display: block;
+                margin: 10px 0;
+                line-height: 30px;
+                /* margin-right: 0px; */
+            }
+            nav ul li a{
+                font-size: 15px;
+                color:grey;
+            }
+            a:hover{
+                background: none;
+                color:#15bdc9;
+            }
+            #check:checked ~ul{
+                /* left: 0; */
+                visibility: visible;
+                
+            }
+        }
+
+        @media all and (max-width: 768px) {
+
+            /* #testimonials,
+            #academics,
+            #blogs {
+                display: none;
+            } */
+
+            #bars {
+                display: block;
+            }
+
+            #tag-line {
+                font-size: 1.42rem;
+            }
+
+            .container {
+                width: 380px;
+                top: -12em;
+                /* background-color: red; */
+            }
+        }
+
+        @media all and (max-width: 480px) {
+
+            /* #testimonials,
+            #academics {
+                display: none;
+            } */
+
+            #bars {
+                display: block;
+            }
+
+            #tag-line {
+                font-size: 1.42rem;
+            }
+
+            .container {
+                width: 350px;
+                /* top: 17em; */
+                top: 11em;
+                left: 1em;
+                transform: translate(5%, 4%);
+                /* background-color: red; */
+            }
+
+            /* @media only screen and (max-width: 768px) {
+                h1{
+                    font-size: 4vh;
+                }
+                .container{
+                    width: 100%;
+                    background-color: red; 
+                }
+            } */
+        }
+
+        @media all and (max-width: 380px) {
+            /* #testimonials,
+            #academics {
+                display: none;
+            } */
+
+            #bars {
+                display: block;
+            }
+
+            #tag-line {
+                font-size: 1.42rem;
+            }
+
+            .container {
+                width: 342px;
+                /* top: 17em; */
+                top: 9em;
+                left: 1em;
+                transform: translate(1%, 4%);
+                /* background-color: red; */
+            }
+
+            @media all and (max-width: 320px){
+                #dd_for_schedule{
+                    margin-left: -1.2em;
+                }
+                .form-group{
+                    padding-left: 1rem;
+                }
+                .container {
+                    width: 290px;
+                }
+            }
+
+            /* @media only screen and (max-width: 768px) {
+                h1{
+                    font-size: 4vh;
+                }
+                .container{
+                    width: 100%;
+                    background-color: red; 
+                }
+            } */
+        }
+    </style>
+    <script type="text/javascript">
+        // should be at the top of the page in head element or before form starts
+        var WisTEnq = function(){
+            let enqObj = {"entries": []};
+            // set field - next field mappings here (ids of field)
+            let nxtFldMap = new Array();		
+            nxtFldMap['fld_course'] = 'fld_location';
+            nxtFldMap['fld_location'] = 'fld_num_learners';
+            nxtFldMap['fld_num_learners'] = 'fld_take_class_at';
+            nxtFldMap['fld_take_class_at'] = 'fld_learners_stage';
+            nxtFldMap['fld_learners_stage'] = 'fld_schedule';
+            nxtFldMap['fld_schedule'] = 'fld_tutor_type';
+            nxtFldMap['fld_tutor_type'] = 'fld_expectations';
+            nxtFldMap['fld_expectations'] = 'fld_comments';
+            
+            // set field - field's drop down container div id here
+            let fldDDContnrMap = new Array();		
+            fldDDContnrMap['fld_learner_type'] = 'dd_for_learner_type';
+            fldDDContnrMap['fld_schedule'] = 'dd_for_schedule';
+            return {    	
+                nextFld: function (curFldId) {
+                    return nxtFldMap[curFldId];
+                },
+                fldContainer: function (fldId) {
+                    return fldDDContnrMap[fldId];
+                },
+                getFld: function (fldId) {
+                    let rVal = null;
+                    let tempArr = enqObj.entries;
+                    tempArr.some(function (entry, index){
+                        if(entry.key === fldId) {
+                            rVal = tempArr[index].val;
+                        }
+                    });
+                    return rVal;
+                },
+                setFld: function (fldId, valJson) {
+                    this.setOrClear(fldId, valJson);
+                },
+                clearFld: function (fldId) {
+                    this.setOrClear(fldId);
+                },
+                enquiryObj: function () {
+                    return enqObj;
+                },
+                setOrClear: function(fld, val) {
+                    let tempArr = enqObj.entries;
+                    let notXsts = true;
+                    tempArr.some(function (entry, index){
+                        if(entry.key === fld) {
+                            if(val) {
+                                tempArr[index].val = val;
+                            } else {
+                                tempArr.splice(index,1);
+                            }
+                            notXsts = false;
+                        }
+                    });
+                    if(notXsts && val) {
+                        let fldEntry = {};
+                        fldEntry["key"] = fld;
+                        fldEntry["val"] = val;
+                        enqObj.entries.push(fldEntry);
+                    }
+                }
+            };
+        }();
+    </script>
+            
+</head>
+
+<body>
+    <div style="z-index: 9997;
+        background: #868686;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 4px;
+        box-shadow: 0 4px 6px #707886;">
+    </div>
+
+    <!-- <div>
+
+        <img src="https://www.expertey.net/wp-content/uploads/2019/09/aakex.png"
+            style="position:absolute;top: 35px;left: 35px;width: 55px;padding: 3px;border: 1px solid #c5c5c5;border-radius: 10px; "
+            scale="0">
+
+        <div id="navbar-menu">
+
+
+            <span id="bars"
+                style="float: right; position:relative;top: 35px; padding-left: 2rem; padding-right: 2rem; ">
+
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()"><i class="fa fa-bars"></i></a>
+
+            </span>
+
+
+            <span id="blogs"
+                style="float: right; position:relative;top: 35px; padding-left: 2rem; padding-right: 2rem;">Blog
+            </span>
+            <span id="testimonials"
+                style="float: right; position:relative;top: 35px; padding-left: 2rem; padding-right: 2rem;">Testimonials
+            </span>
+            <span id="academics"
+                style="float: right; position:relative;top: 35px; padding-left: 2rem; padding-right: 2rem;">For
+                Academics
+            </span>
+
+        </div>
+
+
+
+    </div> -->
+
+        <!-- Navigation Bar starts -->
+        <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+        <a id="nav-toggle" class=""><span></span></a>
+        </label>
+        <!-- <label class="logo"></label> -->
+        <img src="https://www.expertey.net/wp-content/uploads/2019/09/aakex.png"
+            style="position:absolute;top: 35px;left: 35px;width: 55px;padding: 3px;border: 1px solid #c5c5c5;border-radius: 10px; "
+            scale="0">
+        <ul>
+          <li><a href="#">For Academics</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#">Blogs</a></li>
+          
+        </ul>
+    </nav>
+
+    <script>
+        document.querySelector( "#nav-toggle" )
+      .addEventListener( "click", function() {
+        this.classList.toggle( "active" );
+      });
+    </script>
+    <!-- Navigation bar ends -->
+
+    <div id="tag-line">
+        Tutors, Trainers <br>at your doorstep..</div>
+
+
+    <div class="outer-container">
+        <div class="container">
+            <form class="form-group">
+                <div id="fld_course">
+                    <label class="form-label">Tutor / Trainer required for?</label><br />
+                    <input type="text" class="form-input" id="fld_course_input">
+                    <i id="fld_course_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i>
+                    <i id="fld_course_edit_button" class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_course_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                </div>
+                <!-- <button id="custom-button">Watch video</button> -->
+                <div class="inputfield" id="fld_location">
+                    <label class="form-label">Learner's Locality / Location</label><br />
+                    <input type="text" class="form-input" id="fld_location_input">
+                    <i id="fld_location_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i>
+                    <i id="fld_location_edit_button" class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_location_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                </div>
+                <div class="inputfield" id="fld_num_learners">
+                    <label class="form-label">Number of Learners</label><br />
+                    <input type="text" class="form-input" id="fld_num_learners_input">
+                    <i id="fld_num_learners_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i>
+                    <i id="fld_num_learners_edit_button" class="fa fa-pencil"
+                        style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_num_learners_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                    <div class="add_learner" id="add_learner">
+                        <i class="fas fa-plus-circle" onclick="addLearner()"></i>
+                        <p>Team up with a learner from <br>
+                            neighborhood. <br>
+                            Add a Friend / Referral.<br>
+                            Avail Discounts.<br>
+                            Collaborate, Learn Better..
+                        </p>
+                    </div>
+                </div>
+                <div class="inputfield" id="fld_take_class_at">
+                    <label class="form-label">Take classes at</label><br />
+                    <input type="text" class="form-input" id="fld_take_class_at_input">
+                    <i id="fld_take_class_at_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i>
+                    <i id="fld_take_class_at_edit_button" class="fa fa-pencil"
+                        style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_take_class_at_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                </div>
+                <div class="inputfield" id="fld_learners_stage">
+                    <label class="form-label">Learner's stage, type</label><br />
+                    <input type="text" class="form-input" id="fld_learners_stage_input">
+                    <i id="fld_learners_stage_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i> <i id="fld_learners_stage_edit_button"
+                        class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_learners_stage_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                    <div id="dd_for_learner_type" style="border: 1px solid #c1c1c1; border-radius: 3px; margin-top: -1rem; margin-bottom: 1.5em; width: 290px; padding: 1.5em 1em 1em 1.7em; margin-left: -1.2em;">
+                        <label for="learners_stage">Choose learner's stage:</label>
+                        <div class="select-box" style="margin: 1em 0em 2em 0em;">
+                            <select id="learners_stage">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advance">Advance</option>
+                            </select>
+                        </div>
+                        <div style="margin: 1em 0em 2em 0em;">
+                            <p>Recent/Last or Tentative Performance</p>
+                            <div class="select-box">
+                                <select id="learners_performance">
+                                    <option value="Very_poor">Very Poor</option>
+                                    <option value="poor">Poor</option>
+                                    <option value="ok">OK</option>
+                                    <option value="good">Good</option>
+                                    <option value="excellent">Excellent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <div style="width: max-content;">
+                            <input type="checkbox" id="" class="" value="Brilliant" />
+                            <label for="">Brilliant</label>
+                            <input type="checkbox" id="" class="" value="Quick Learner" />
+                            <label for="">Quick Learner</label>
+                            <input type="checkbox" id="" class="" value="Average" />
+                            <label for="">Average</label>
+                            <input type="checkbox" id="" class="" value="Slow Learner" />
+                            <label for="">Slow Learner</label>
+                            <input type="checkbox" id="" class="" value="Laid back" />
+                            <label for="">Laid back</label>
+                            <input type="checkbox" id="" class="" value="Takes it Easy" />
+                            <label for="">Takes it Easy</label>
+                            <input type="checkbox" id="" class="" value="Motivated" />
+                            <label for="">Motivated</label>
+                            <input type="checkbox" id="" class="" value="Driven" />
+                            <label for="">Driven</label>
+                            <input type="checkbox" id="" class="" value="Committed to Learn" />
+                            <label for="">Committed to Learn</label>
+                            <input type="checkbox" id="" class="" value="Enthusiastic, Hungry to Learn" />
+                            <label for="">Enthusiastic, Hungry to Learn</label>
+                            <input type="checkbox" id="" class="" value="Good Memory" />
+                            <label for="">Good Memory</label>
+                            <input type="checkbox" id="" class="" value="Poor Memory" />
+                            <label for="">Poor Memory</label>
+                            <input type="checkbox" id="" class="" value="Focus, Concentartion Issues" />
+                            <label for="">Focus, Concentartion Issues</label>
+                            <input type="checkbox" id="" class="" value="Will Power Issues" />
+                            <label for="">Will Power Issues</label>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="inputfield" id="fld_schedule">
+                    <label class="form-label">How long, How often, What time</label><br />
+                    <input type="text" class="form-input" id="fld_schedule_input" readonly
+                        style="text-overflow:ellipsis" onclick="activateEditMode(this.parentElement.id)">
+                    <i id="fld_schedule_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i> 
+                        <i id="fld_schedule_edit_button"
+                        class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_schedule_input_errorMsg" class="errorMsg" style="margin-top: -2.2em; margin-bottom: 2em;">Please fill the details</p>
+                    <br>
+
+                    <div id="dd_for_schedule" style="border: 1px solid #c1c1c1; border-radius: 3px;
+                    margin-top: -2rem; margin-bottom: 1.5em;
+                    width: 290px; padding: 1rem;">
+                        <p style="color: grey; padding-bottom: 1rem;">Select Days</p>
+                        <div id="weekDays-selector">
+                            <input type="checkbox" id="weekday-mon" class="weekday" value="Mon" />
+                            <label for="weekday-mon">Mon</label>
+                            <input type="checkbox" id="weekday-tue" class="weekday" value="Tue" />
+                            <label for="weekday-tue">Tue</label>
+                            <input type="checkbox" id="weekday-wed" class="weekday" value="Wed" />
+                            <label for="weekday-wed">Wed</label>
+                            <input type="checkbox" id="weekday-thu" class="weekday" value="Thu" />
+                            <label for="weekday-thu">Thu</label>
+                            <input type="checkbox" id="weekday-fri" class="weekday" value="Fri" />
+                            <label for="weekday-fri" style="margin-left: 1.9em;">Fri</label>
+                            <input type="checkbox" id="weekday-sat" class="weekday" value="Sat" />
+                            <label for="weekday-sat">Sat</label>
+                            <input type="checkbox" id="weekday-sun" class="weekday" value="Sun" />
+                            <label for="weekday-sun">Sun</label>
+                        </div>
+                        <div class="time-selection" style="margin-top: 0.5em;">
+                            <span style="color: grey;">Time</span>
+                            <input type="text" id="class-time" style="padding: 5px;
+                        margin: 20px 0px 15px 0px;  
+                        border: none;
+                        border-bottom: 1px solid rgb(21, 189, 201);" maxlength="5" size="5" />
+                            <span>
+                                <input type="radio" name="class-time-format" id="class-time-am" value="AM"><span
+                                    style="padding: 0.5rem;">AM </span>
+                                <input type="radio" name="class-time-format" id="class-time-pm" value="PM"><span
+                                    style="padding: 0.5rem;">PM</span>
+
+                            </span>
+                        </div>
+                        <div class="duration" style="margin-top: 0.1em;">
+                            <span style="color: grey;">Duration</span>
+                            <input type="text" id="class-duration" style="padding: 5px;
+                        margin: 20px 0px 40px 0px;
+                        border: none;
+                        border-bottom: 1px solid rgb(21, 189, 201);" maxlength="5" size="5" /> hrs
+
+                        </div>
+                        <span onclick="processSchedule(this.parentElement.id)"
+                            style="float: right;background: #30707e!important; color: #fff!important; font-size: .8rem; font-weight: 600!important; border-radius: 4px; padding: 5px 15px!important; ">
+                            OK</span>
+
+                        <span onclick="resetSchedule()" style="    background: #ffffff!important;
+                       color: #907a7a!important;
+                       font-size: .8rem;
+                       font-weight: 600!important;
+                       border-radius: 4px; border: 1px solid #c7c7c7;
+                       padding: 5px 15px!important; ">Clear
+                    </div>
+
+                    </span>
+                </div>
+                <div class="inputfield" id="fld_tutor_type">
+                    <label class="form-label">Tutor / Trainer</label><br />
+                    <input type="text" class="form-input" id="fld_tutor_type_input">
+                    <i id="fld_tutor_type_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i> <i id="fld_tutor_type_edit_button"
+                        class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_tutor_type_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                </div>
+                <div class="inputfield" id="fld_expectations">
+                    <label class="form-label">Expectations</label><br />
+                    <input type="text" class="form-input" id="fld_expectations_input">
+                    <i id="fld_expectations_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i> <i id="fld_expectations_edit_button"
+                        class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_expectations_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                </div>
+                <div class="inputfield" id="fld_comments">
+                    <label class="form-label">Comments</label><br />
+                    <input type="text" class="form-input" id="fld_comments_input">
+                    <i id="fld_comments_process_button" class="fa fa-chevron-right"
+                        onclick="processInputFld(this.parentElement.id)"></i> <i id="fld_comments_edit_button"
+                        class="fa fa-pencil" style="font-size: 0.8rem; visibility:hidden"
+                        onclick="activateEditMode(this.parentElement.id)"></i>
+                    <br>
+                    <p id="fld_comments_input_errorMsg" class="errorMsg">Please fill the details</p>
+                    <br>
+                    <span style="background: #30707e!important; color: #fff!important; font-size: .8rem; font-weight: 600!important; border-radius: 4px; padding: 10px 25px!important; margin-left: 40%;">
+                    OK</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // document.getElementById('fld_course').style.visibility = "visible";
+        // // document.getElementById('fld_course').style.display = "block";
+        
+        // // document.getElementById('fld_schedule').style.visibility = "visible";
+
+        // var WisTEnq = function () {
+        //     let enqObj = { "entries": [] };
+        //     // set field - next field mappings here (ids of field)
+        //     let nxtFldMap = new Array();
+        //     nxtFldMap['fld_course'] = 'fld_location';
+        //     nxtFldMap['fld_location'] = 'fld_num_learners';
+        //     nxtFldMap['fld_num_learners'] = 'fld_take_class_at';
+        //     nxtFldMap['fld_take_class_at'] = 'fld_learners_stage';
+        //     nxtFldMap['fld_learners_stage'] = 'fld_schedule';
+        //     nxtFldMap['fld_schedule'] = 'fld_tutor_type';
+        //     nxtFldMap['fld_tutor_type'] = 'fld_expectations';
+        //     nxtFldMap['fld_expectations'] = 'fld_comments';
+
+
+        //     // set field - field's drop down container div id here
+        //     let fldDDContnrMap = new Array();
+        //     fldDDContnrMap['fld_learner_type'] = 'dd_for_learner_type';
+        //     fldDDContnrMap['fld_schedule'] = 'dd_for_schedule';
+
+
+        //     // map to hold Field id - Field JSON value mappings
+        //     let fldValMap = new Array();
+
+
+        //     return {
+        //         nextFld: function (curFldId) {
+        //             return nxtFldMap[curFldId];
+        //         },
+        //         fldContainer: function (fldId) {
+        //             return fldDDContnrMap[fldId];
+        //         },
+        //         getFld: function (fldId) {
+        //             return fldValMap[fldId];
+        //         },
+        //         setFld: function (fldId, valJson) {
+        //             let fldEntry = {};
+        //             fldEntry["key"] = fldId;
+        //             fldEntry["val"] = valJson;
+        //             // enqObj.entries.push(fldEntry);
+        //             let tempArr = enqObj.entries;
+        //             let count = 0;
+        //             let notXsts = true;
+        //             tempArr.some(function (entry, index) {
+        //                 if (entry.key === fldId) {
+        //                     tempArr[count].val = valJson;
+        //                     notXsts = false;
+        //                 }
+        //                 count++;
+        //             });
+        //             if (notXsts) {
+        //                 enqObj.entries.push(fldEntry);
+        //             }
+        //             fldValMap[fldId] = valJson;
+        //         },
+        //         enquiryObj: function () {
+        //             return enqObj;
+        //         }
+        //     };
+        // }();
+
+
+
+        // // test get next field of current field 
+        // console.log("Next Field for 'fld_course' => " + WisTEnq.nextFld('fld_course'));
+        // console.log("Next Field for 'fld_location' => " + WisTEnq.nextFld('fld_location'));
+        // console.log("Next Field for 'fld_num_learners' => " + WisTEnq.nextFld('fld_num_learners'));
+
+
+
+
+        // // test get form container drop down id of a field 
+        // console.log("Field drop down container id for 'fld_course' => " + WisTEnq.fldContainer('fld_schedule'));
+
+
+
+
+        // // test get field value JSON
+        // let fldValJson = {
+        //         "ttl": "Mathematics",
+        //         "level": "9th Standard",
+        //         "duration": "Full Year",
+        //         "board": "CBSE",
+        //         "id" : "Course01"
+        //     }; 	
+        // WisTEnq.setFld('fld_course', fldValJson);	
+
+        // console.log("Get Field Value JSON for 'fld_course'  => " + JSON.stringify(WisTEnq.getFld('fld_course')));
+
+
+
+        // // test get Complete Enquiry JSON
+        console.log("Get Complete Enquiry JSON with key / value entries  => " + JSON.stringify(WisTEnq.enquiryObj()));
+
+        function processInputFld(parentId) {
+            let curInputId = parentId + "_input";
+            if(formValidation(curInputId)){
+                deactivateEditMode(parentId);
+
+                if (parentId != "fld_comments") {
+                    let nxtParentId = WisTEnq.nextFld(parentId);
+                    document.getElementById(nxtParentId).style.visibility = "visible";
+                    document.getElementById(nxtParentId).style.display = "block";
+
+                    let nxtInputFld = nxtParentId + "_input";
+
+                    if (parentId == "fld_schedule") {
+                        document.getElementById('dd_for_schedule').style.display = "none";
+                    }
+                    else if (parentId == "fld_num_learners") {
+                        document.getElementById('add_learner').style.display = "none";
+                    }
+                    document.getElementById(nxtInputFld).focus();
+                }
+
+
+                let curVal = document.getElementById(curInputId).value;
+                let fldValJson = {
+                    [curInputId]: curVal
+                }
+                WisTEnq.setFld(parentId, fldValJson);
+            
+                console.log("Get Field Value JSON for " + parentId + " => " + JSON.stringify(WisTEnq.getFld(parentId)));
+                console.log("Get Complete Enquiry JSON with key / value entries  => " + JSON.stringify(WisTEnq.enquiryObj()));
+            }
+        }
+
+        function deactivateEditMode(parentId) {
+            let processButtonId = parentId + "_process_button";
+            let editButtonId = parentId + "_edit_button";
+            let curInputId = parentId + "_input";
+
+            document.getElementById(curInputId).style.borderBottom = "0px";
+            document.getElementById(processButtonId).style.visibility = "hidden";
+            document.getElementById(editButtonId).style.visibility = "visible";
+
+
+            document.getElementById(curInputId).readOnly = true;
+        }
+        function activateEditMode(parentId) {
+            let processButtonId = parentId + "_process_button";
+            let editButtonId = parentId + "_edit_button";
+            let curInputId = parentId + "_input";
+
+            document.getElementById(curInputId).style.borderBottom = "1px solid rgb(21, 189, 201)";
+            document.getElementById(processButtonId).style.visibility = "visible";
+            document.getElementById(editButtonId).style.visibility = "hidden";
+
+            if (parentId == "fld_schedule") {
+                    document.getElementById('dd_for_schedule').style.display = "inline-block";
+                }
+            if (parentId == "fld_num_learners") {
+                document.getElementById('add_learner').style.display = "inline-block";
+            }
+
+            // console.log(parentInputId)
+            if (parentId == "fld_schedule") {
+                document.getElementById('dd_for_schedule').style.visibility = "visible";
+            }
+            else {
+                inputId = parentId + "_input";
+                document.getElementById(inputId).readOnly = false;
+            }
+        }
+        function processSchedule(parentId) {
+            console.log(parentId);
+            let output = "";
+            let fldValJson = {
+                frequency: "",
+                over: "W",
+                routine: []
+            }
+            
+
+            let classTimeValue = $("#class-time").val();
+            fldRoutine.time = classTimeValue;
+
+            let classTimeFormatValue = $("input[name='class-time-format']:checked").val();
+            fldRoutine.format = classTimeFormatValue;
+
+            let classDurationValue = $("#class-duration").val();
+            // console.log(classDurationValue);
+
+            fldRoutine.duration = classDurationValue; 
+
+            let weekDaysSelector = $("#weekDays-selector input:checked");
+
+            fldValJson.frequency = weekDaysSelector.length;
+
+            weekDaysSelector.each(function () {
+                let fldRoutine = {
+                days: "",
+                time: "",
+                format: "",
+                duration: ""
+            }
+                let selectedDay = $(this).val();
+                fldRoutine.days = selectedDay;
+                console.log(fldRoutine); 
+                fldValJson.routine.push(fldRoutine);
+                console.log(fldValJson);
+                output += selectedDay + " ";
+                if (classTimeValue != undefined && classTimeValue != null)
+                    output += classTimeValue + " ";
+
+                if (classTimeFormatValue != undefined && classTimeFormatValue != null)
+                    output += classTimeFormatValue + " ";
+
+            });
+
+            if (classDurationValue != undefined && classDurationValue != "")
+                output += classDurationValue + "hrs ";
+
+
+            $("#fld_schedule_input").val(output.trim());
+
+            WisTEnq.setFld("fld_schedule", fldValJson);
+            console.log("Get Field Value JSON for " + "fld_schedule" + " => " + JSON.stringify(WisTEnq.getFld("fld_schedule")));
+            console.log("Get Complete Enquiry JSON with key / value entries  => " + JSON.stringify(WisTEnq.enquiryObj()));
+
+            document.getElementById(parentId).style.visibility = "hidden";
+            document.getElementById('dd_for_schedule').style.display = "none";
+            // deactivateEditMode("fld_schedule");
+            // activateEditMode("fld_schedule");
+        }
+        function resetSchedule() {
+            let weekDaysSelector = $("#weekDays-selector input:checked");
+            weekDaysSelector.each(function () {
+                $(this).prop("checked", false);
+            });
+
+            $("#class-time").val("");
+            $("input[name='class-time-format']:checked").prop("checked", false);
+            $("#class-duration").val("");
+            $("#fld_schedule_input").val("");
+        }
+
+        // add Learners 
+        function addLearner() {
+            var value = parseInt(document.getElementById('fld_num_learners_input').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('fld_num_learners_input').value = value;
+        }
+
+        function formValidation(curInputId){
+            let errorId = curInputId + "_errorMsg";  
+            if(document.getElementById(curInputId).value == "" && curInputId !="fld_comments_input")
+            {
+                document.getElementById(errorId).style.visibility = "visible";
+                return false;
+            }
+            else
+            {
+                document.getElementById(errorId).style.visibility = "hidden";
+                return true;
+            }
+            
+        }
+    </script>
+
+</body>
+
+</html>
